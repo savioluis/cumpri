@@ -2,7 +2,7 @@ import 'package:cumpri/core/extensions/navigator_extension.dart';
 import 'package:cumpri/core/widgets/cumpri_appbar.dart';
 import 'package:cumpri/data/models/task_model.dart';
 import 'package:cumpri/stores/task_store.dart';
-import 'package:cumpri/views/form/task_form_view.dart';
+import 'package:cumpri/views/task_form/task_form_view.dart';
 import 'package:cumpri/views/home/widgets/task_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

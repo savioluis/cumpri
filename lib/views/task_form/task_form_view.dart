@@ -1,6 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cumpri/core/extensions/color_extension.dart';
 import 'package:cumpri/core/extensions/navigator_extension.dart';
+import 'package:cumpri/core/extensions/text_extension.dart';
 import 'package:cumpri/core/theme/color/app_colors.dart';
 import 'package:cumpri/core/widgets/cumpri_appbar.dart';
 import 'package:cumpri/core/widgets/cumpri_text_field.dart';
@@ -94,21 +96,22 @@ class TaskFormView extends StatelessWidget {
                         if (states.contains(WidgetState.disabled)) {
                           return AppColors.grey.withOpacity(0.12);
                         }
-                        return AppColors.primary;
+                        return context.primaryColor;
                       }),
                       foregroundColor: WidgetStateProperty.resolveWith<Color>((states) {
                         if (states.contains(WidgetState.disabled)) {
                           return AppColors.grey.withOpacity(0.38);
                         }
-                        return AppColors.onPrimary;
+                        return context.onPrimaryColor;
                       }),
 
                       overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
                         if (states.contains(WidgetState.pressed)) {
-                          return Colors.grey.withOpacity(0.2);
+                          return AppColors.lightGrey.withOpacity(0.2);
                         }
                         return null;
                       }),
+                      textStyle: WidgetStatePropertyAll(context.displayLarge?.copyWith(fontSize: 20))
                     ),
                 child: Text(isEditing ? 'Salvar Alterações' : 'Criar Tarefa'),
               ),

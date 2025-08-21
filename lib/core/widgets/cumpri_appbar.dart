@@ -1,6 +1,7 @@
 import 'package:cumpri/core/extensions/color_extension.dart';
 import 'package:cumpri/core/extensions/text_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
 class CumpriAppBar extends StatelessWidget implements PreferredSize {
   const CumpriAppBar({
@@ -8,6 +9,8 @@ class CumpriAppBar extends StatelessWidget implements PreferredSize {
     required this.title,
     this.subtitle,
     this.onBackPressed,
+    this.onActionPressed,
+    this.actionIcon,
     super.key,
   });
 
@@ -15,6 +18,8 @@ class CumpriAppBar extends StatelessWidget implements PreferredSize {
   final String title;
   final String? subtitle;
   final Function()? onBackPressed;
+  final Function()? onActionPressed;
+  final Icon? actionIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +39,34 @@ class CumpriAppBar extends StatelessWidget implements PreferredSize {
                 )
               : null,
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              title,
-              style: context.displayMedium?.copyWith(
-                fontSize: 36,
-                color: context.primaryColor,
-              ),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: context.headlineLarge?.copyWith(
+                    fontSize: 32,
+                    color: context.primaryColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                if (onActionPressed != null && actionIcon != null)
+                  IconButton(
+                    onPressed: onActionPressed,
+                    icon: actionIcon!,
+                  ),
+              ],
             ),
           ),
           if (subtitle != null)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 subtitle!,
                 style: context.bodyLarge?.copyWith(
                   color: context.lightGreyColor,
+                  fontSize: 18,
                 ),
               ),
             ),

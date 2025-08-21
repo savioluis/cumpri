@@ -1,14 +1,20 @@
-import 'package:cumpri/core/theme/extensions/color_extension.dart';
-import 'package:cumpri/core/theme/extensions/text_extension.dart';
+import 'package:cumpri/core/extensions/color_extension.dart';
+import 'package:cumpri/core/extensions/text_extension.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget implements PreferredSize {
-  const HomeAppBar({
+class CumpriAppBar extends StatelessWidget implements PreferredSize {
+  const CumpriAppBar({
     this.height = 96,
+    required this.title,
+    this.subtitle,
+    this.onBackPressed,
     super.key,
   });
 
   final double height;
+  final String title;
+  final String? subtitle;
+  final Function()? onBackPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,25 +25,34 @@ class HomeAppBar extends StatelessWidget implements PreferredSize {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          ?onBackPressed != null
+              ? IconButton(
+                  onPressed: onBackPressed,
+                  icon: Icon(
+                    Icons.arrow_back,
+                  ),
+                )
+              : null,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
-              'Bem-vindo',
+              title,
               style: context.displayMedium?.copyWith(
                 fontSize: 36,
                 color: context.primaryColor,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12),
-            child: Text(
-              '12 tarefas encontradas',
-              style: context.bodyLarge?.copyWith(
-                color: context.lightGreyColor,
+          if (subtitle != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                subtitle!,
+                style: context.bodyLarge?.copyWith(
+                  color: context.lightGreyColor,
+                ),
               ),
             ),
-          ),
           SizedBox(height: 12),
           Divider(
             thickness: 0.2,

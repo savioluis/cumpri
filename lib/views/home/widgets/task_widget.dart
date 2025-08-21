@@ -1,5 +1,5 @@
-import 'package:cumpri/core/theme/extensions/color_extension.dart';
-import 'package:cumpri/core/theme/extensions/text_extension.dart';
+import 'package:cumpri/core/extensions/color_extension.dart';
+import 'package:cumpri/core/extensions/text_extension.dart';
 import 'package:flutter/material.dart';
 
 class TaskWidget extends StatelessWidget {

@@ -14,29 +14,29 @@ class TextFieldThemeData {
       hintStyle: TextStyle(fontSize: 16, color: AppColors.lightGrey.withOpacity(0.5)),
       focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.primary),
+        borderSide: BorderSide(width: 0.4, color: AppColors.primary),
       ),
       disabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: Colors.orange),
+        borderSide: BorderSide(width: 0.4, color: Colors.orange),
       ),
       enabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.lightGrey),
+        borderSide: BorderSide(width: 0.4, color: AppColors.lightGrey),
       ),
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         borderSide: BorderSide(
-          width: 1,
+          width: 0.4,
         ),
       ),
       errorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.error),
+        borderSide: BorderSide(width: 0.4, color: AppColors.error),
       ),
       focusedErrorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.error),
+        borderSide: BorderSide(width: 0.4, color: AppColors.error),
       ),
     );
   }
@@ -51,29 +51,29 @@ class TextFieldThemeData {
       contentPadding: const EdgeInsets.symmetric(horizontal: 12 , vertical: 18),
       focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.darkPrimary),
+        borderSide: BorderSide(width: 0.4, color: AppColors.darkPrimary),
       ),
       disabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: Colors.orange),
+        borderSide: BorderSide(width: 0.4, color: Colors.orange),
       ),
       enabledBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.darkLightGrey),
+        borderSide: BorderSide(width: 0.4, color: AppColors.darkLightGrey),
       ),
       border: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         borderSide: BorderSide(
-          width: 1,
+          width: 0.4,
         ),
       ),
       errorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.darkError),
+        borderSide: BorderSide(width: 0.4, color: AppColors.darkError),
       ),
       focusedErrorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(8)),
-        borderSide: BorderSide(width: 1, color: AppColors.darkError),
+        borderSide: BorderSide(width: 0.4, color: AppColors.darkError),
       ),
     );
   }

@@ -12,14 +12,17 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 class HomeView extends StatelessWidget {
   HomeView({
     required this.themeStore,
+    required this.taskStore,
     super.key,
   });
 
   final ThemeStore themeStore;
-  final TaskStore taskStore = TaskStore();
+  final TaskStore taskStore;
 
   final currentDay = DateTime.now().day;
   final currentMonth = DateTimeUtil.getMonthName(DateTime.now().month);
+
+  List get tasks => taskStore.tasks;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,10 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: CumpriAppBar(
             title: '$currentDay de $currentMonth',
-            subtitle: taskStore.tasks.isNotEmpty
-                ? '${taskStore.tasks.length} tarefas encontradas'
+            subtitle: tasks.isNotEmpty
+                ? tasks.length > 1
+                      ? '${tasks.length} tarefas encontradas'
+                      : '1 tarefa encontrada'
                 : 'Nenhuma tarefa encontrada',
             actionIcon: themeStore.isDarkMode ? Icon(Icons.light_mode) : Icon(Icons.dark_mode),
             onActionPressed: themeStore.toggleTheme,

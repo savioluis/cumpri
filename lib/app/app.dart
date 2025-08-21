@@ -1,4 +1,5 @@
 import 'package:cumpri/core/theme/app_theme.dart';
+import 'package:cumpri/stores/task_store.dart';
 import 'package:cumpri/stores/theme_store.dart';
 import 'package:cumpri/views/home/home_view.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ class CumpriApp extends StatelessWidget {
   CumpriApp({super.key});
 
   final ThemeStore themeStore = ThemeStore();
+  final TaskStore taskStore = TaskStore();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class CumpriApp extends StatelessWidget {
         routes: {
           '/': (_) => HomeView(
             themeStore: themeStore,
+            taskStore: taskStore,
           ),
         },
         initialRoute: '/',

@@ -1,7 +1,7 @@
 import 'package:cumpri/core/extensions/navigator_extension.dart';
 import 'package:cumpri/core/utils/date_time_util.dart';
+import 'package:cumpri/core/utils/dialog_util.dart';
 import 'package:cumpri/core/widgets/cumpri_appbar.dart';
-import 'package:cumpri/data/models/task_model.dart';
 import 'package:cumpri/stores/task_store.dart';
 import 'package:cumpri/stores/theme_store.dart';
 import 'package:cumpri/views/task_form/task_form_view.dart';
@@ -16,10 +16,7 @@ class HomeView extends StatelessWidget {
   });
 
   final ThemeStore themeStore;
-
-  final TaskStore taskStore = TaskStore()
-    ..addTask(TaskModel(title: 'Tarefa 1', description: 'Fazer tal coisa'))
-    ..addTask(TaskModel(title: 'Tarefa 2', description: 'Outra coisa'));
+  final TaskStore taskStore = TaskStore();
 
   final currentDay = DateTime.now().day;
   final currentMonth = DateTimeUtil.getMonthName(DateTime.now().month);
@@ -31,7 +28,9 @@ class HomeView extends StatelessWidget {
         return Scaffold(
           appBar: CumpriAppBar(
             title: '$currentDay de $currentMonth',
-            subtitle: '${taskStore.tasks.length} tarefas encontradas',
+            subtitle: taskStore.tasks.isNotEmpty
+                ? '${taskStore.tasks.length} tarefas encontradas'
+                : 'Nenhuma tarefa encontrada',
             actionIcon: themeStore.isDarkMode ? Icon(Icons.light_mode) : Icon(Icons.dark_mode),
             onActionPressed: themeStore.toggleTheme,
           ),
@@ -51,6 +50,18 @@ class HomeView extends StatelessWidget {
                     taskStore: taskStore,
                     task: task,
                   ),
+                ),
+                onTaskLongPressed: () => DialogUtil.showAlert(
+                  context: context,
+                  message: 'Deseja mesmo apagar essa atividade e todos os seus dados ?',
+                  title: 'Aviso',
+                  confirmLabel: 'Apagar',
+                  cancelLabel: 'Cancelar',
+                  onConfirm: () {
+                    taskStore.deleteTask(task);
+                    context.popView(context);
+                  },
+                  onCancel: () => context.popView(context),
                 ),
               );
             },

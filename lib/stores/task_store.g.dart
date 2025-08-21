@@ -66,6 +66,18 @@ mixin _$TaskStore on _TaskStore, Store {
   }
 
   @override
+  void deleteTask(TaskModel task) {
+    final _$actionInfo = _$_TaskStoreActionController.startAction(
+      name: '_TaskStore.deleteTask',
+    );
+    try {
+      return super.deleteTask(task);
+    } finally {
+      _$_TaskStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 tasks: ${tasks}

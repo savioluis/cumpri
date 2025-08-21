@@ -29,4 +29,12 @@ abstract class _TaskStore with Store {
       tasks[index] = updatedTask;
     }
   }
+
+  @action
+  void deleteTask(TaskModel task) {
+    final index = tasks.indexOf(task);
+    if (index != -1) {
+      tasks.removeAt(index);
+    }
+  }
 }

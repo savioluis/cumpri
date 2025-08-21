@@ -9,6 +9,7 @@ class TaskWidget extends StatelessWidget {
     this.description,
     required this.isDone,
     required this.onCheckPressed,
+    required this.onTaskLongPressed,
     required this.onTaskPressed,
   });
 
@@ -16,6 +17,7 @@ class TaskWidget extends StatelessWidget {
   final String? description;
   final VoidCallback onCheckPressed;
   final VoidCallback onTaskPressed;
+  final VoidCallback onTaskLongPressed;
 
   final bool isDone;
 
@@ -60,6 +62,7 @@ class TaskWidget extends StatelessWidget {
           ),
         ),
         onTap: onTaskPressed,
+        onLongPress: onTaskLongPressed,
       ),
     );
   }

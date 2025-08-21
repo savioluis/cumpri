@@ -1,4 +1,5 @@
 import 'package:cumpri/core/theme/color/app_colors.dart';
+import 'package:cumpri/core/theme/text_field/text_field_theme_data.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -18,6 +19,7 @@ class AppTheme {
     return baseTheme.copyWith(
       scaffoldBackgroundColor: AppColors.surface,
       colorScheme: colorScheme,
+      inputDecorationTheme: TextFieldThemeData.lightTheme(colorScheme),
     );
   }
 
@@ -37,6 +39,7 @@ class AppTheme {
     return baseTheme.copyWith(
       scaffoldBackgroundColor: AppColors.darkSurface,
       colorScheme: colorScheme,
+      inputDecorationTheme: TextFieldThemeData.darkTheme(colorScheme),
     );
   }
 }

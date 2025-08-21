@@ -10,32 +10,42 @@ import 'package:cumpri/data/models/task_model.dart';
 import 'package:flutter/material.dart';
 import 'package:cumpri/stores/task_store.dart';
 
-class TaskFormView extends StatelessWidget {
+class TaskFormView extends StatefulWidget {
   final TaskStore taskStore;
   final TaskModel? task;
 
-  TaskFormView({
+  const TaskFormView({
     super.key,
     required this.taskStore,
     this.task,
   });
 
+  @override
+  State<TaskFormView> createState() => _TaskFormViewState();
+}
+
+class _TaskFormViewState extends State<TaskFormView> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
+  late final bool isEditing;
+
   bool _isEditing() {
-    return task != null;
+    return widget.task != null;
+  }
+
+  @override
+  void initState() {
+    isEditing = _isEditing();
+    if (isEditing && widget.task != null) {
+      titleController.text = widget.task!.title;
+      descriptionController.text = widget.task!.description ?? '';
+    }
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool isEditing = _isEditing();
-
-    if (isEditing && task != null) {
-      titleController.text = task!.title;
-      descriptionController.text = task!.description ?? '';
-    }
-
     return Scaffold(
       appBar: CumpriAppBar(
         title: isEditing ? 'Editar tarefa' : 'Nova tarefa',
@@ -75,14 +85,14 @@ class TaskFormView extends StatelessWidget {
 
                   if (title.isEmpty) return;
 
-                  if (isEditing && task != null) {
-                    final updatedTask = task!.copyWith(
+                  if (isEditing && widget.task != null) {
+                    final updatedTask = widget.task!.copyWith(
                       title: title,
                       description: description.isEmpty ? null : description,
                     );
-                    taskStore.updateTask(task!, updatedTask);
+                    widget.taskStore.updateTask(widget.task!, updatedTask);
                   } else {
-                    taskStore.addTask(TaskModel(title: title, description: description));
+                    widget.taskStore.addTask(TaskModel(title: title, description: description));
                   }
 
                   context.popView(context);
@@ -111,7 +121,7 @@ class TaskFormView extends StatelessWidget {
                         }
                         return null;
                       }),
-                      textStyle: WidgetStatePropertyAll(context.displayLarge?.copyWith(fontSize: 20))
+                      textStyle: WidgetStatePropertyAll(context.displayLarge?.copyWith(fontSize: 20)),
                     ),
                 child: Text(isEditing ? 'Salvar Alterações' : 'Criar Tarefa'),
               ),

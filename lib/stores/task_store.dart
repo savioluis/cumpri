@@ -21,4 +21,12 @@ abstract class _TaskStore with Store {
       tasks[index] = task.copyWith(isDone: !task.isDone);
     }
   }
+
+  @action
+  void updateTask(TaskModel oldTask, TaskModel updatedTask) {
+    final index = tasks.indexOf(oldTask);
+    if (index != -1) {
+      tasks[index] = updatedTask;
+    }
+  }
 }

@@ -54,6 +54,18 @@ mixin _$TaskStore on _TaskStore, Store {
   }
 
   @override
+  void updateTask(TaskModel oldTask, TaskModel updatedTask) {
+    final _$actionInfo = _$_TaskStoreActionController.startAction(
+      name: '_TaskStore.updateTask',
+    );
+    try {
+      return super.updateTask(oldTask, updatedTask);
+    } finally {
+      _$_TaskStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 tasks: ${tasks}

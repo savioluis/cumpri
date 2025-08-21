@@ -2,5 +2,5 @@ import 'package:cumpri/app/app.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const CumpriApp());
+  runApp(CumpriApp());
 }

@@ -1,5 +1,5 @@
 import 'package:cumpri/core/theme/color/app_colors.dart';
-import 'package:cumpri/core/theme/extensions/theme_extension.dart';
+import 'package:cumpri/core/extensions/theme_extension.dart';
 import 'package:flutter/material.dart';
 
 extension ColorExtension on BuildContext {

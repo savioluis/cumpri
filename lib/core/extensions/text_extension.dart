@@ -1,4 +1,4 @@
-import 'package:cumpri/core/theme/extensions/theme_extension.dart';
+import 'package:cumpri/core/extensions/theme_extension.dart';
 import 'package:flutter/material.dart';
 
 extension TextThemeExtension on BuildContext {

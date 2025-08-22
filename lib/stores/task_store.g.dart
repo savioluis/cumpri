@@ -24,57 +24,46 @@ mixin _$TaskStore on _TaskStore, Store {
     });
   }
 
-  late final _$_TaskStoreActionController = ActionController(
-    name: '_TaskStore',
+  late final _$addTaskAsyncAction = AsyncAction(
+    '_TaskStore.addTask',
     context: context,
   );
 
   @override
-  void addTask(TaskModel task) {
-    final _$actionInfo = _$_TaskStoreActionController.startAction(
-      name: '_TaskStore.addTask',
-    );
-    try {
-      return super.addTask(task);
-    } finally {
-      _$_TaskStoreActionController.endAction(_$actionInfo);
-    }
+  Future<void> addTask(TaskModel task) {
+    return _$addTaskAsyncAction.run(() => super.addTask(task));
   }
 
-  @override
-  void toggleTaskDone(TaskModel task) {
-    final _$actionInfo = _$_TaskStoreActionController.startAction(
-      name: '_TaskStore.toggleTaskDone',
-    );
-    try {
-      return super.toggleTaskDone(task);
-    } finally {
-      _$_TaskStoreActionController.endAction(_$actionInfo);
-    }
-  }
+  late final _$toggleTaskDoneAsyncAction = AsyncAction(
+    '_TaskStore.toggleTaskDone',
+    context: context,
+  );
 
   @override
-  void updateTask(TaskModel oldTask, TaskModel updatedTask) {
-    final _$actionInfo = _$_TaskStoreActionController.startAction(
-      name: '_TaskStore.updateTask',
-    );
-    try {
-      return super.updateTask(oldTask, updatedTask);
-    } finally {
-      _$_TaskStoreActionController.endAction(_$actionInfo);
-    }
+  Future<void> toggleTaskDone(TaskModel task) {
+    return _$toggleTaskDoneAsyncAction.run(() => super.toggleTaskDone(task));
   }
 
+  late final _$updateTaskAsyncAction = AsyncAction(
+    '_TaskStore.updateTask',
+    context: context,
+  );
+
   @override
-  void deleteTask(TaskModel task) {
-    final _$actionInfo = _$_TaskStoreActionController.startAction(
-      name: '_TaskStore.deleteTask',
+  Future<void> updateTask(TaskModel oldTask, TaskModel updatedTask) {
+    return _$updateTaskAsyncAction.run(
+      () => super.updateTask(oldTask, updatedTask),
     );
-    try {
-      return super.deleteTask(task);
-    } finally {
-      _$_TaskStoreActionController.endAction(_$actionInfo);
-    }
+  }
+
+  late final _$deleteTaskAsyncAction = AsyncAction(
+    '_TaskStore.deleteTask',
+    context: context,
+  );
+
+  @override
+  Future<void> deleteTask(TaskModel task) {
+    return _$deleteTaskAsyncAction.run(() => super.deleteTask(task));
   }
 
   @override

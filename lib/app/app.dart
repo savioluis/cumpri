@@ -1,4 +1,6 @@
 import 'package:cumpri/core/theme/app_theme.dart';
+import 'package:cumpri/data/database/app_database.dart';
+import 'package:cumpri/data/repositories/task_repository.dart';
 import 'package:cumpri/stores/task_store.dart';
 import 'package:cumpri/stores/theme_store.dart';
 import 'package:cumpri/views/home/home_view.dart';
@@ -9,7 +11,11 @@ class CumpriApp extends StatelessWidget {
   CumpriApp({super.key});
 
   final ThemeStore themeStore = ThemeStore();
-  final TaskStore taskStore = TaskStore();
+  final TaskStore taskStore = TaskStore(
+    repository: TaskRepository(
+      database: AppDatabase.instance(),
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {

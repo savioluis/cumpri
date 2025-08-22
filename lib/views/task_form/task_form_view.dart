@@ -92,7 +92,12 @@ class _TaskFormViewState extends State<TaskFormView> {
                     );
                     widget.taskStore.updateTask(widget.task!, updatedTask);
                   } else {
-                    widget.taskStore.addTask(TaskModel(title: title, description: description));
+                    widget.taskStore.addTask(
+                      TaskModel(
+                        title: title,
+                        description: description.isEmpty ? null : description,
+                      ),
+                    );
                   }
 
                   context.popView(context);

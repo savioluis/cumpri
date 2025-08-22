@@ -1,4 +1,5 @@
 import 'package:cumpri/data/models/task_model.dart';
+import 'package:cumpri/data/repositories/task_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'task_store.g.dart';
@@ -6,24 +7,42 @@ part 'task_store.g.dart';
 class TaskStore = _TaskStore with _$TaskStore;
 
 abstract class _TaskStore with Store {
+  _TaskStore({required TaskRepository repository}) : _repository = repository {
+    _observeTasks();
+  }
+
+  final TaskRepository _repository;
+
+  void _observeTasks() async {
+    final allTasks = await _repository.getAllTasks();
+    tasks = ObservableList.of(allTasks);
+  }
+
   @observable
   ObservableList<TaskModel> tasks = ObservableList<TaskModel>();
 
   @action
-  void addTask(TaskModel task) {
-    tasks.add(task);
+  Future<void> addTask(TaskModel task) async {
+    final id = await _repository.createTask(task);
+    final newTask = task.copyWith(id: id);
+    tasks.add(newTask);
   }
 
   @action
-  void toggleTaskDone(TaskModel task) {
+  Future<void> toggleTaskDone(TaskModel task) async {
+    final updatedTask = task.copyWith(isDone: !task.isDone);
+    await _repository.updateTask(updatedTask);
+
     final index = tasks.indexOf(task);
     if (index != -1) {
-      tasks[index] = task.copyWith(isDone: !task.isDone);
+      tasks[index] = updatedTask;
     }
   }
 
   @action
-  void updateTask(TaskModel oldTask, TaskModel updatedTask) {
+  Future<void> updateTask(TaskModel oldTask, TaskModel updatedTask) async {
+    await _repository.updateTask(updatedTask);
+
     final index = tasks.indexOf(oldTask);
     if (index != -1) {
       tasks[index] = updatedTask;
@@ -31,10 +50,10 @@ abstract class _TaskStore with Store {
   }
 
   @action
-  void deleteTask(TaskModel task) {
-    final index = tasks.indexOf(task);
-    if (index != -1) {
-      tasks.removeAt(index);
-    }
+  Future<void> deleteTask(TaskModel task) async {
+    if (task.id == null) return;
+
+    await _repository.deleteTask(task.id!);
+    tasks.remove(task);
   }
 }

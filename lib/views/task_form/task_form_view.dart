@@ -60,7 +60,7 @@ class _TaskFormViewState extends State<TaskFormView> {
             SizedBox(height: 8),
             CumpriTextField(
               controller: titleController,
-              hintText: 'Título',
+              hintText: 'ex: Fazer jantar',
             ),
             const SizedBox(height: 36),
             Text('Descrição'),
@@ -69,7 +69,7 @@ class _TaskFormViewState extends State<TaskFormView> {
               constraints: const BoxConstraints(maxHeight: 156),
               child: CumpriTextField(
                 controller: descriptionController,
-                hintText: 'Descrição',
+                hintText: 'Cozinhar macarrão com carne...',
                 maxLines: null,
               ),
             ),

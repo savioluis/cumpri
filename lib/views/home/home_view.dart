@@ -99,11 +99,7 @@ class _HomeViewState extends State<HomeView> {
           floatingActionButton = tasks.isNotEmpty
               ? FloatingActionButton(
                   onPressed: () {
-                    context.pushView(
-                      (context) => TaskFormView(
-                        taskStore: widget.taskStore,
-                      ),
-                    );
+                    context.pushView('/task_form');
                   },
                   child: const Icon(Icons.add),
                 )
@@ -125,12 +121,7 @@ class _HomeViewState extends State<HomeView> {
                         description: task.description,
                         isDone: task.isDone,
                         onCheckPressed: () => widget.taskStore.toggleTaskDone(task),
-                        onTaskPressed: () => context.pushView(
-                          (context) => TaskFormView(
-                            taskStore: widget.taskStore,
-                            task: task,
-                          ),
-                        ),
+                        onTaskPressed: () => context.pushView('/task_form', arguments: task),
                         onTaskLongPressed: () => DialogUtil.showAlert(
                           context: context,
                           message: 'Deseja mesmo apagar essa atividade e todos os seus dados ?',
@@ -155,8 +146,8 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        spacing: 8,
                         children: [
+                          Text('🎯', style: TextStyle(fontSize: 80)),
                           Text(
                             'Nada por aqui...',
                             style: context.headlineLarge?.copyWith(
@@ -166,14 +157,18 @@ class _HomeViewState extends State<HomeView> {
                             ),
                             textAlign: TextAlign.center,
                           ),
+                          Text(
+                            'Comece sua organização agora',
+                            style: context.labelSmall?.copyWith(
+                              color: context.greyColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          SizedBox(height: 12),
                           FilledButton.icon(
-                            onPressed: () {
-                              context.pushView(
-                                (context) => TaskFormView(
-                                  taskStore: widget.taskStore,
-                                ),
-                              );
-                            },
+                            onPressed: () => context.pushView('/task_form'),
                             icon: const Icon(Icons.add),
                             label: const Text('Nova Tarefa'),
                           ),

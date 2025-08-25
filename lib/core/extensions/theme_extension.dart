@@ -6,5 +6,4 @@ extension ThemeExtension on BuildContext {
   ColorScheme get colorScheme => theme.colorScheme;
   ButtonThemeData get buttonTheme => theme.buttonTheme;
   bool get isDarkMode => theme.brightness == Brightness.dark;
-  
 }

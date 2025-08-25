@@ -9,19 +9,29 @@ part of 'task_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TaskStore on _TaskStore, Store {
-  late final _$tasksAtom = Atom(name: '_TaskStore.tasks', context: context);
+  late final _$stateAtom = Atom(name: '_TaskStore.state', context: context);
 
   @override
-  ObservableList<TaskModel> get tasks {
-    _$tasksAtom.reportRead();
-    return super.tasks;
+  TaskState get state {
+    _$stateAtom.reportRead();
+    return super.state;
   }
 
   @override
-  set tasks(ObservableList<TaskModel> value) {
-    _$tasksAtom.reportWrite(value, super.tasks, () {
-      super.tasks = value;
+  set state(TaskState value) {
+    _$stateAtom.reportWrite(value, super.state, () {
+      super.state = value;
     });
+  }
+
+  late final _$loadInitialTasksAsyncAction = AsyncAction(
+    '_TaskStore.loadInitialTasks',
+    context: context,
+  );
+
+  @override
+  Future<void> loadInitialTasks() {
+    return _$loadInitialTasksAsyncAction.run(() => super.loadInitialTasks());
   }
 
   late final _$addTaskAsyncAction = AsyncAction(
@@ -69,7 +79,7 @@ mixin _$TaskStore on _TaskStore, Store {
   @override
   String toString() {
     return '''
-tasks: ${tasks}
+state: ${state}
     ''';
   }
 }

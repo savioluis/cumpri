@@ -4,6 +4,10 @@ Aplicativo de gerenciamento de tarefas desenvolvido em Flutter, pensado para ser
 
 ---
 
+## 🎬 Demonstração 
+
+https://github.com/user-attachments/assets/215135c6-8b99-45da-9fe8-6b848256a78d
+
 ## 🚀 Funcionalidades
 
 | Funcionalidade                | Descrição                                                     |

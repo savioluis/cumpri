@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 
 extension NavigatorExtensions on BuildContext {
-  Future<T?> pushView<T>(Widget Function(BuildContext) builder) {
-    return Navigator.push<T>(
+  Future<T?> pushView<T>(String routeName, {Object? arguments}) {
+    return Navigator.pushNamed<T>(
       this,
-      MaterialPageRoute(builder: builder),
+      routeName,
+      arguments: arguments,
     );
   }
 
-  Future<T?> pushReplacementView<T, TO>(Widget Function(BuildContext) builder) {
-    return Navigator.pushReplacement<T, TO>(
+  Future<T?> pushReplacementView<T, TO>(String routeName, {Object? arguments}) {
+    return Navigator.pushReplacementNamed<T, TO>(
       this,
-      MaterialPageRoute(builder: builder),
+      routeName,
+      arguments: arguments,
     );
   }
 
-  Future<T?> pushAndRemoveUntilPage<T>(Widget Function(BuildContext) builder) {
-    return Navigator.pushAndRemoveUntil<T>(
+  Future<T?> pushAndRemoveUntilPage<T>(String routeName, {Object? arguments}) {
+    return Navigator.pushNamedAndRemoveUntil<T>(
       this,
-      MaterialPageRoute(builder: builder),
+      routeName,
       (route) => false,
+      arguments: arguments,
     );
   }
 
